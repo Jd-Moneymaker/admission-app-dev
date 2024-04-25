@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "219964592239",
+    "project_id": "moneymaker-admission-dev",
+    "storage_bucket": "moneymaker-admission-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:219964592239:android:c19d3c8db9d8958f1b3d9a",
+        "android_client_info": {
+          "package_name": "com.example.admission_app_dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPoezKoIiiTsYARdgAaQ1cq1hRyQDPkCo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
