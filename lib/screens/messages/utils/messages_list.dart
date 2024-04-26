@@ -43,7 +43,6 @@ class _MessagesListState extends State<MessagesList> {
                 },
               );
             } catch (e) {
-              // Handle any potential errors here
               return const Center(
                 child: Text(
                   'An error occurred while building the messages.',
@@ -68,8 +67,13 @@ class _MessagesListState extends State<MessagesList> {
     Map<String, dynamic> messageData = document.data()! as Map<String, dynamic>;
 
     // ! to fix if messageData is not null, but data inside the document is null then toDate() and other text widgets crashes the app
-    var ts = messageData['time'].toDate();
-    final formattedDate = DateFormat.jm().format(ts);
+    var ts = messageData['time']?.toDate();
+    String formattedDate = '';
+    if (ts != null) {
+      final formattedDate = DateFormat.jm().format(ts);
+    } else {
+      const formattedDate = 'Unknown';
+    }
 
     final isMe = (FirebaseChatApi.currentUserEmail == messageData['reciever']);
 
@@ -156,7 +160,7 @@ class _MessagesListState extends State<MessagesList> {
                               maxWidth:
                                   MediaQuery.of(context).size.width * 0.54),
                           child: Text(
-                            messageData['lastMessage'],
+                            messageData['lastMessage'] ?? 'send new message',
                             style: messageData['seen'] == false && isMe
                                 ? textBoldB
                                 : textSmallB,

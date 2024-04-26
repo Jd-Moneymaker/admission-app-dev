@@ -84,9 +84,12 @@ class _UploadUserImageState extends State<UploadUserImage> {
                 onPressed: () {
                   pickImage();
                 },
-                child: const Icon(
-                  Icons.image,
+                child: Image.asset(
+                  'assets/png/user.png',
                   color: Colors.white,
+                  height: 32,
+                  width: 32,
+                  fit: BoxFit.cover,
                 ),
               )
             : Column(

@@ -45,6 +45,7 @@ class _MessageScreenState extends State<MessageScreen> {
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.black,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
         centerTitle: false,
         title: const Padding(
@@ -60,20 +61,7 @@ class _MessageScreenState extends State<MessageScreen> {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(left: 15, right: 10),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, 'profile_screen');
-              },
-              child: const Icon(
-                Icons.person,
-                color: Colors.white,
-                size: 20,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 15, right: 20),
+            padding: const EdgeInsets.only(left: 15, right: 25),
             child: GestureDetector(
               onTap: () {
                 Navigator.of(context).pop();

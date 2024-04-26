@@ -111,7 +111,7 @@ class EditProfileScreen extends StatelessWidget {
                                       },
                                       child: Container(
                                         height: 60,
-                                        width: 175,
+                                        width: 165,
                                         decoration: const BoxDecoration(
                                           color: Colors.white,
                                           borderRadius: BorderRadius.all(
@@ -129,7 +129,7 @@ class EditProfileScreen extends StatelessWidget {
                                       onTap: () => Navigator.of(context).pop(),
                                       child: Container(
                                         height: 60,
-                                        width: 175,
+                                        width: 165,
                                         decoration: const BoxDecoration(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(10)),

@@ -30,5 +30,6 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(ProfileError(error.toString()));
       log('Error: $error');
     }
+    emit(ProfileLoading());
   }
 }

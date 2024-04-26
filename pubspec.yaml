@@ -35,8 +35,11 @@ flutter:
   assets:
     - assets/map/
     - assets/images/
+    - assets/png/
     - assets/png_assets/
     - assets/svg_assets/
+    - assets/colleges/
+
 
   # fonts:
   #   - family: Schyler

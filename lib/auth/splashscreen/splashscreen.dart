@@ -1,8 +1,8 @@
 // import 'package:chat_app/screens/messages/message_screen.dart';
+import 'package:admission_app_dev/screens/home/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../api/firebase_chat_api.dart';
-import '../../screens/home/home_screen.dart';
 import '../auth.dart';
 
 class SplashScreen extends StatefulWidget {
