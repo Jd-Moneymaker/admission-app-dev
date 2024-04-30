@@ -1,342 +1,218 @@
-import 'dart:ui';
-
+import 'package:admission_app_dev/screens/home/widgets/bottom_appbar.dart';
 import 'package:admission_app_dev/style/style.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
-import '../homepage/widgets/cource_slider.dart';
-import '../homepage/widgets/institute_card.dart';
+import 'widgets/card.dart';
+import 'widgets/drawer.dart';
 
 final TextEditingController _searchController = TextEditingController();
 
 String url = 'assets/png/search.png';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        resizeToAvoidBottomInset: true,
-        extendBody: true,
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(14), // Adjust the
-              color: Colors.black,
-            ),
-            child: BottomAppBar(
-              height: 65,
-              color: Colors.transparent,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Image.asset(
-                    'assets/png/home.png',
-                    color: Colors.white,
-                  ),
-                  Image.asset(
-                    'assets/png/heart.png',
-                    color: Colors.white,
-                  ),
-                  GestureDetector(
-                    onTap: () =>
-                        Navigator.of(context).pushNamed('message_screen'),
-                    child: Image.asset(
-                      'assets/png/message.png',
-                      color: Colors.white,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () =>
-                        Navigator.of(context).pushNamed('profile_screen'),
-                    child: Image.asset(
-                      'assets/png/user.png',
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-        drawer: homeScreenDrawer(context, url),
-        body: SingleChildScrollView(
-          child: SizedBox(
-            height: MediaQuery.of(context).size.height,
-            child: Column(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.3,
-                  decoration: const BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(16),
-                      bottomRight: Radius.circular(16),
-                    ),
-                  ),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(top: 65, left: 20, right: 20),
-                    child: Column(
-                      children: [
-                        // ! heading and drawer icon
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Hello Moneymaker,',
-                                  style: textBoldW,
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  'What can we do for u today ?',
-                                  style: textBoldW,
-                                ),
-                              ],
-                            ),
-                            Builder(builder: (context) {
-                              return SizedBox(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Scaffold.of(context).openDrawer();
-                                  },
-                                  child: Image.asset(
-                                    'assets/png/menu-right.png',
-                                    color: Colors.white,
-                                    height: 35,
-                                    width: 35,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              );
-                            }),
-                          ],
-                        ),
-                        // ! heading and drawer icon
-
-                        const SizedBox(
-                          height: 30,
-                        ),
-
-                        // ! searchField
-
-                        TextFormField(
-                          controller: _searchController,
-                          cursorColor: Colors.black,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            suffixIcon: Image.asset('assets/png/search.png'),
-                            fillColor: Colors.white,
-                            isDense: true,
-                            filled: true,
-                            hintText: 'Search',
-                            hintStyle: textBoldB,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            errorBorder: InputBorder.none,
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 16, horizontal: 15),
-                          ),
-                        )
-
-                        // ! searchField
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    decoration: const BoxDecoration(color: Colors.white),
-                    child: Column(
-                      children: [
-                        // ! course type slider
-                        SizedBox(
-                          height: 60,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: const [
-                              CourceSlider(
-                                title: 'Science',
-                                image: 'assets/png/science.png',
-                              ),
-                              CourceSlider(
-                                title: 'Commerce',
-                                image: 'assets/png/commerce.png',
-                              ),
-                              CourceSlider(
-                                title: 'Arts',
-                                image: 'assets/png/arts.png',
-                              ),
-                            ],
-                          ),
-                        ),
-                        // ! course type slider
-
-                        // ! main feed => cources , posts , ads
-                        SizedBox(
-                          height: 415,
-                          child: Expanded(
-                            child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              children: const [
-                                InstituteCard(
-                                  title: 'Lady Kean College',
-                                  description:
-                                      'Popular cources include BA, Bcom,Bttm ..',
-                                  url: 'assets/colleges/lady kean college.jpg',
-                                ),
-                                InstituteCard(
-                                  title: 'St Mary\'s College',
-                                  description:
-                                      'Popular cources incluse Ba, Bcom, Mcom..',
-                                  url: 'assets/colleges/smc.jpg',
-                                ),
-                                InstituteCard(
-                                  title: 'Shillong College',
-                                  description:
-                                      'Popular cources incluse Ba, BBA, Bcom ..',
-                                  url: 'assets/colleges/shillong college.jpg',
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        // ! main feed => cources , posts , ads
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-Widget homeScreenDrawer(BuildContext context, String url) => Stack(
-      children: [
-        BackdropFilter(
-          filter: ImageFilter.blur(
-            sigmaX: 6,
-            sigmaY: 6,
-          ),
-          child: const SizedBox.expand(),
-        ),
-        Drawer(
-          width: MediaQuery.of(context).size.width / 1.22,
+class _HomeScreenState extends State<HomeScreen> {
+  final _controller = PageController();
+
+  bool isKeyboardOpen = false;
+
+  void didChangeMetrics() {
+    setState(() {
+      // Update isKeyboardOpen based on the keyboard state
+      isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+      // ? drawer
+      drawer: homeScreenDrawer(context, url),
+      // ? drawer
+      resizeToAvoidBottomInset: false,
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: SingleChildScrollView(
           child: Column(
             children: [
-              Expanded(
-                flex: 1,
-                child: Container(
+              // ! top container holds welcome text, menu , and search field
+              Container(
+                height: MediaQuery.of(context).size.height * 0.3,
+                decoration: const BoxDecoration(
                   color: Colors.black,
-                  width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 30),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Container(
-                          height: 70,
-                          width: 70,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Image.asset(
-                            'assets/png/user.png',
-                            color: Colors.black,
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(16),
+                    bottomRight: Radius.circular(16),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 65, left: 20, right: 20),
+                  child: Column(
+                    children: [
+                      // ! heading and drawer icon
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Moneymaker',
+                                'Hello Moneymaker,',
                                 style: textBoldW,
                               ),
                               SizedBox(
-                                height: 10,
+                                height: 5,
                               ),
                               Text(
-                                '+91 9774426514',
-                                style: textSmallW,
+                                'What can we do for u today ?',
+                                style: textBoldW,
                               ),
                             ],
                           ),
-                        )
-                      ],
-                    ),
+                          Builder(builder: (context) {
+                            return SizedBox(
+                              child: GestureDetector(
+                                onTap: () {
+                                  Scaffold.of(context).openDrawer();
+                                },
+                                child: Image.asset(
+                                  'assets/png/menu-right.png',
+                                  color: Colors.white,
+                                  height: 35,
+                                  width: 35,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            );
+                          }),
+                        ],
+                      ),
+                      // ! heading and drawer icon
+
+                      const SizedBox(
+                        height: 30,
+                      ),
+
+                      // ! searchField
+                      TextFormField(
+                        controller: _searchController,
+                        cursorColor: Colors.black,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          suffixIcon: Image.asset(
+                            'assets/png/slider.png',
+                          ),
+                          fillColor: Colors.white,
+                          isDense: true,
+                          filled: true,
+                          hintText: 'Search',
+                          hintStyle: textBoldB,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          errorBorder: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 16, horizontal: 15),
+                        ),
+                      )
+                      // ! searchField
+                    ],
                   ),
                 ),
               ),
-              Expanded(
-                flex: 2,
-                child: Container(
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        menuItem('assets/png/document.png', 'Documents', () {}),
-                        menuItem('assets/png/course.png', 'Cources', () {}),
-                        menuItem('assets/png/heart.png', 'Liked', () {}),
-                        menuItem('assets/png/save.png', 'Saved', () {}),
-                        menuItem('assets/png/logout.png', 'Logout', () async {
-                          await FirebaseAuth.instance.signOut();
-                        }),
-                      ],
+              // ! top container holds welcome text, menu , and search field
+
+              // ! bottom container => holds popolur heading and image carousel
+              Container(
+                decoration: const BoxDecoration(color: Colors.white),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 20,
                     ),
-                  ),
+                    // ? heading
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      child: Text(
+                        'Popular destinations',
+                        style: textBoldB,
+                      ),
+                    ),
+                    // ? heading
+
+                    const SizedBox(
+                      height: 5,
+                    ),
+
+                    // ? sub heading
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      child: Text(
+                        'Filter using the filter button  in search field above ..',
+                        style: textSmallB,
+                      ),
+                    ),
+                    // ? sub heading
+
+                    const SizedBox(
+                      height: 10,
+                    ),
+
+                    // ? main feed => cources
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: CarouselSlider(
+                        options: CarouselOptions(
+                          height: 380,
+                          enableInfiniteScroll: true,
+                          autoPlay: false,
+                          enlargeCenterPage:
+                              true, // Make the center image larger
+                        ),
+                        items: const [
+                          CarouselCard(
+                            image: 'assets/colleges/1.jpeg',
+                            title: 'St Anthonys College',
+                            location: 'Laitumkhrah, Shillong',
+                          ),
+                          CarouselCard(
+                            image: 'assets/colleges/2.jpeg',
+                            title: 'Cheng Park',
+                            location: 'Gangtok, Sikkim',
+                          ),
+                          CarouselCard(
+                            image: 'assets/colleges/3.jpeg',
+                            title: 'Starbucks',
+                            location: 'Siliguri, West bengal',
+                          ),
+                          CarouselCard(
+                            image: 'assets/colleges/4.jpeg',
+                            title: 'Cathedral',
+                            location: 'Laitumkhrah, Shillong',
+                          ),
+                        ],
+                      ),
+                    ),
+                    // ? main feed => cources
+
+                    // ! cannot use bottomAppbar in scaffold because it sticks to keyboard
+                    bottomAppbar(context),
+                  ],
                 ),
-              )
+              ),
+              // ! bottom container => holds popolur heading and image carousel
             ],
           ),
         ),
-      ],
-    );
-
-Widget menuItem(String icon, String title, Function()? onTap) => InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: Image.asset(
-                icon,
-                color: Colors.black,
-              ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Expanded(
-              flex: 4,
-              child: Text(
-                title,
-                style: textSmallB,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+      ));
+}

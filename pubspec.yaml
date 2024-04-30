@@ -8,6 +8,7 @@ environment:
   sdk: '>=3.3.3 <4.0.0'
 dependencies:
   bloc: ^8.1.4
+  carousel_slider: ^4.2.1
   cloud_firestore: ^4.9.1
   cupertino_icons: ^1.0.6
   firebase_auth: ^4.7.2
@@ -39,6 +40,8 @@ flutter:
     - assets/png_assets/
     - assets/svg_assets/
     - assets/colleges/
+    - assets/blur/
+
 
 
   # fonts:
