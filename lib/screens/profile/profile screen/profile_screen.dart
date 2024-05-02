@@ -1,3 +1,4 @@
+import 'package:admission_app_dev/screens/profile/edit%20profile%20screen/edit_profile_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,197 +36,215 @@ class ProfileScreen extends StatelessWidget {
               for (var doc in profileData) {
                 final Map<String, dynamic> data =
                     doc.data() as Map<String, dynamic>;
-                return Stack(
+                return PageView(
+                  scrollDirection: Axis.vertical,
                   children: [
-                    Column(
+                    Stack(
                       children: [
-                        // ! cover pic
-                        Expanded(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            color: Colors.black,
-                            child: userPic(
-                              context,
-                              data['coverPic'] ?? '',
-                            ),
-                          ),
-                        ),
-                        // ! cover pic
-
-                        // * this sits under the main content's container
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.78,
-                          width: MediaQuery.of(context).size.width,
-                          color: Colors.white,
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height,
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 12, bottom: 24, left: 146),
-                                    child: Text(
-                                      data['name'] ?? 'User',
-                                      style: followersFollowingText,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-                              // ? bio
-                              Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 25, vertical: 10),
-                                  child: Container(
-                                    constraints: const BoxConstraints(
-                                        minHeight: 50, maxHeight: 55),
-                                    child: Center(
-                                      child: Text(
-                                        data['bio'] ?? 'Enter bio',
-                                        style: textSmallB,
-                                      ),
-                                    ),
-                                  )),
-                              // ? bio
-
-                              // * buttons
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 15, vertical: 10),
+                              // ! cover pic
+                              Expanded(
                                 child: Container(
-                                  height: 64,
-                                  width: double.infinity,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.black,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(14)),
+                                  width: MediaQuery.of(context).size.width,
+                                  color: Colors.black,
+                                  child: userPic(
+                                    context,
+                                    data['coverPic'] ?? '',
                                   ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Row(
+                                ),
+                              ),
+                              // ! cover pic
+
+                              // * this sits under the main content's container
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.8,
+                                width: MediaQuery.of(context).size.width,
+                                color: Colors.white,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Column(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Container(
-                                          height: 60,
-                                          width: 165,
-                                          decoration: const BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10)),
-                                          ),
-                                          child: const Center(
-                                            child: Text(
-                                              'Add friend',
-                                              style: textSmallB,
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                          height: 60,
-                                          width: 165,
-                                          decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10)),
-                                          ),
-                                          child: const Center(
-                                            child: Text(
-                                              'Message',
-                                              style: textSmallW,
-                                            ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 10, bottom: 20, left: 146),
+                                          child: Text(
+                                            data['name'] ?? 'User',
+                                            style: followersFollowingText,
                                           ),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                ),
-                              ),
-                              // * buttons
 
-                              // ! main app content like the pictures
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 15, vertical: 10),
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                        color: Colors.black,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(14))),
-                                  ),
+                                    // ? bio
+                                    Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 25, vertical: 8),
+                                        child: Container(
+                                          constraints: const BoxConstraints(
+                                              minHeight: 50, maxHeight: 55),
+                                          child: Center(
+                                            child: Text(
+                                              data['bio'] ?? 'Enter bio',
+                                              style: textSmallB,
+                                            ),
+                                          ),
+                                        )),
+                                    // ? bio
+
+                                    // * buttons
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 10),
+                                      child: Container(
+                                        height: 55,
+                                        width: double.infinity,
+                                        decoration: const BoxDecoration(
+                                          color: Colors.black,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(14)),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                width: 165,
+                                                decoration: const BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(10)),
+                                                ),
+                                                child: const Center(
+                                                  child: Text(
+                                                    'Add friend',
+                                                    style: textSmallB,
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                width: 165,
+                                                decoration: const BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(10)),
+                                                ),
+                                                child: const Center(
+                                                  child: Text(
+                                                    'Message',
+                                                    style: textSmallW,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    // * buttons
+
+                                    // ! main app content like the pictures
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 15, vertical: 10),
+                                        child: Container(
+                                          decoration: const BoxDecoration(
+                                              color: Colors.black,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(14))),
+                                        ),
+                                      ),
+                                    ),
+                                    // ! main app content like the pictures
+                                  ],
                                 ),
                               ),
-                              // ! main app content like the pictures
                             ],
                           ),
                         ),
-                      ],
-                    ),
-                    // * back button
-                    Positioned(
-                      top: 50,
-                      right: 25,
-                      child: Column(
-                        children: [
-                          GestureDetector(
-                            onTap: () => Navigator.of(context).pop(),
-                            child: const Icon(
-                              Icons.close,
-                              size: 26,
-                              color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 40,
-                          ),
-                          GestureDetector(
-                            onTap: () => Navigator.of(context)
-                                .pushNamed('edit_profile_screen'),
-                            child: const Icon(
-                              Icons.edit,
-                              size: 20,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    // * close screen button and edit profile button
-
-                    // * profile pic
-                    Positioned(
-                      top: MediaQuery.of(context).size.height * 0.15,
-                      left: 20,
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(14),
-                          ),
-                        ),
-                        child: Padding(
-                            padding: const EdgeInsets.all(2),
-                            child: Row(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(12),
-                                  child: Container(
-                                    width: 110,
-                                    height: 100,
-                                    color: Colors.black,
-                                    child: userPic(
-                                        context, data['profilePic'] ?? ''),
+                        // * back button
+                        Positioned(
+                          top: 50,
+                          right: 25,
+                          child: Column(
+                            children: [
+                              GestureDetector(
+                                onTap: () => Navigator.of(context).pop(),
+                                child: const Icon(
+                                  Icons.close,
+                                  size: 26,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 40,
+                              ),
+                              GestureDetector(
+                                onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        EditProfileScreen(data: data),
                                   ),
                                 ),
-                              ],
-                            )),
-                      ),
+                                child: const Icon(
+                                  Icons.edit,
+                                  size: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        // * close screen button and edit profile button
+
+                        // * profile pic
+                        Positioned(
+                          top: MediaQuery.of(context).size.height * 0.13,
+                          left: 20,
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(14),
+                              ),
+                            ),
+                            child: Padding(
+                                padding: const EdgeInsets.all(2),
+                                child: Row(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(12),
+                                      child: Container(
+                                        width: 110,
+                                        height: 100,
+                                        color: Colors.black,
+                                        child: userPic(
+                                            context, data['profilePic'] ?? ''),
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                          ),
+                        ),
+                        // * profile pic
+                      ],
                     ),
-                    // * profile pic
+                    Container(
+                      color: Colors.white,
+                    )
                   ],
                 );
               }

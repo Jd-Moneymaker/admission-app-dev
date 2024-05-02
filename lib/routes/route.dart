@@ -23,8 +23,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const MessageScreen());
       case 'profile_screen':
         return MaterialPageRoute(builder: (_) => const ProfileScreen());
-      case 'edit_profile_screen':
-        return MaterialPageRoute(builder: (_) => EditProfileScreen());
+
       // case 'location_screen':
       //   return MaterialPageRoute(builder: (_) => const LocationScreen());
       // case 'message_screen':

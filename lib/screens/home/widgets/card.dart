@@ -1,13 +1,14 @@
-import 'package:admission_app_dev/style/style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
+import '../../post/post.dart';
 
 class CarouselCard extends StatelessWidget {
-  const CarouselCard(
-      {super.key,
-      required this.image,
-      required this.title,
-      required this.location});
+  const CarouselCard({
+    super.key,
+    required this.image,
+    required this.title,
+    required this.location,
+  });
 
   final String image;
   final String title;
@@ -17,13 +18,25 @@ class CarouselCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(image),
-              fit: BoxFit.cover,
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => Posts(image: image)));
+          },
+          child: Hero(
+            transitionOnUserGestures: true,
+            tag: image,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(image),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
             ),
-            borderRadius: BorderRadius.circular(15),
           ),
         ),
         Align(
@@ -31,11 +44,9 @@ class CarouselCard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Container(
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(215, 255, 255, 255),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(8),
-                ),
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(215, 255, 255, 255),
+                borderRadius: BorderRadius.circular(8),
               ),
               height: 60,
               child: Padding(
@@ -46,7 +57,7 @@ class CarouselCard extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: textBoldB,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Row(
                       children: [
@@ -61,7 +72,7 @@ class CarouselCard extends StatelessWidget {
                         ),
                         Text(location),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),

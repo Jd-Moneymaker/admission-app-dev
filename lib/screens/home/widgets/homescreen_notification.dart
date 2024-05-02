@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../../../style/style.dart';
 
@@ -12,11 +11,11 @@ class HomeScreenNotification extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
       child: Stack(
         children: [
           Container(
-            height: 65,
+            height: 60,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -25,11 +24,22 @@ class HomeScreenNotification extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(15),
             ),
-            child: Center(
-              child: Text(
-                title,
-                style: textBoldW,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  style: textBoldW,
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                const Icon(
+                  Icons.arrow_forward,
+                  color: Colors.white,
+                  size: 15,
+                )
+              ],
             ),
           ),
         ],

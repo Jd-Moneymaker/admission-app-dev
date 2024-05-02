@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 import 'widgets/card.dart';
 import 'widgets/drawer.dart';
+import 'widgets/homescreen_notification.dart';
 
 final TextEditingController _searchController = TextEditingController();
 
@@ -18,17 +19,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _controller = PageController();
-
-  bool isKeyboardOpen = false;
-
-  void didChangeMetrics() {
-    setState(() {
-      // Update isKeyboardOpen based on the keyboard state
-      isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
-    });
-  }
-
   @override
   Widget build(BuildContext context) => Scaffold(
       // ? drawer
@@ -42,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               // ! top container holds welcome text, menu , and search field
               Container(
-                height: MediaQuery.of(context).size.height * 0.3,
+                height: MediaQuery.of(context).size.height * 0.264,
                 decoration: const BoxDecoration(
                   color: Colors.black,
                   borderRadius: BorderRadius.only(
@@ -51,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 65, left: 20, right: 20),
+                  padding: const EdgeInsets.only(top: 55, left: 20, right: 20),
                   child: Column(
                     children: [
                       // ! heading and drawer icon
@@ -133,47 +123,31 @@ class _HomeScreenState extends State<HomeScreen> {
 
               // ! bottom container => holds popolur heading and image carousel
               Container(
+                height: MediaQuery.of(context).size.height * 0.736,
                 decoration: const BoxDecoration(color: Colors.white),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      height: 20,
+                    const HomeScreenNotification(
+                      image: 'assets/blur/blur.jpg',
+                      title: 'Check your application status',
                     ),
                     // ? heading
                     const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30),
-                      child: Text(
-                        'Popular destinations',
-                        style: textBoldB,
-                      ),
-                    ),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 45, vertical: 8),
+                        child: Text(
+                          'Popular destinations',
+                          style: textBoldB,
+                        )),
                     // ? heading
-
-                    const SizedBox(
-                      height: 5,
-                    ),
-
-                    // ? sub heading
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30),
-                      child: Text(
-                        'Filter using the filter button  in search field above ..',
-                        style: textSmallB,
-                      ),
-                    ),
-                    // ? sub heading
-
-                    const SizedBox(
-                      height: 10,
-                    ),
 
                     // ? main feed => cources
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: CarouselSlider(
                         options: CarouselOptions(
-                          height: 380,
+                          height: 360,
                           enableInfiniteScroll: true,
                           autoPlay: false,
                           enlargeCenterPage:
@@ -204,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     // ? main feed => cources
-
+                    const Spacer(),
                     // ! cannot use bottomAppbar in scaffold because it sticks to keyboard
                     bottomAppbar(context),
                   ],

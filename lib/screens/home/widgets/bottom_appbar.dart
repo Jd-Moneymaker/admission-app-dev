@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 Widget bottomAppbar(BuildContext context) => Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: Container(
-        height: 60,
+        height: 55,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(14),
           color: Colors.black,

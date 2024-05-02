@@ -25,22 +25,38 @@ class FirebaseApi {
   }
 
   Future<void> updateProfile(
-    String userId,
-    String name,
-    String username,
-    String bio,
-  ) async {
-    final Map<String, dynamic> profileData = {
-      'name': name,
-      'username': username,
-      'bio': bio,
-    };
+      {required String userId,
+      String? name,
+      String? username,
+      String? bio,
+      String? gender,
+      DateTime? dob}) async {
+    final Map<String, dynamic> profileData = {};
+
+    if (name != null && name.isNotEmpty) {
+      profileData['name'] = name;
+    }
+    if (username != null && username.isNotEmpty) {
+      profileData['username'] = username;
+    }
+    if (bio != null && bio.isNotEmpty) {
+      profileData['bio'] = bio;
+    }
+    if (gender != null && gender.isNotEmpty) {
+      profileData['gender'] = gender;
+    }
+    if (dob != null) {
+      profileData['dob'] = dob;
+    }
 
     try {
-      await _firestore.collection("users").doc(userId).update(profileData);
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(userId)
+          .update(profileData);
       log('Updated $userId profile details');
     } catch (error) {
-      log('Error marking message as read: $error');
+      log('Error updating profile: $error');
       // Handle error as needed
     }
   }

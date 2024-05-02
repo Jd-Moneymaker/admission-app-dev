@@ -1,8 +1,8 @@
+import 'package:admission_app_dev/auth/signin/signin.dart';
 import 'package:flutter/material.dart';
 
 import '../../style/style.dart';
 import '../login/login.dart';
-import '../signin/signin.dart';
 
 class LoginSigninTabBar extends StatelessWidget {
   const LoginSigninTabBar({super.key});
@@ -38,8 +38,9 @@ class LoginSigninTabBar extends StatelessWidget {
                 children: [
                   // Content for Tab 1
                   Login(),
+
                   // Content for Tab 2
-                  SignIn()
+                  SignIn(),
                   // Content for Tab 3
                 ],
               ),
