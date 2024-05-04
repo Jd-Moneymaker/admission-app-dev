@@ -48,15 +48,11 @@ class _MessageScreenState extends State<MessageScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
         centerTitle: false,
-        title: const Padding(
-          padding: EdgeInsets.only(left: 8),
+        title: Padding(
+          padding: const EdgeInsets.only(left: 8),
           child: Text(
             'Messages',
-            style: TextStyle(
-              fontSize: 22,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
+            style: textBoldW.copyWith(fontSize: 20),
           ),
         ),
         actions: [

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../auth/auth.dart';
 import '../auth/splashscreen/splashscreen.dart';
 import '../screens/messages/message screen/message_screen.dart';
-import '../screens/profile/edit profile screen/edit_profile_screen.dart';
 import '../screens/profile/profile screen/profile_screen.dart';
 
 class RouteGenerator {

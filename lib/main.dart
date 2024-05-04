@@ -1,4 +1,5 @@
 import 'package:admission_app_dev/firebase_options.dart';
+import 'package:admission_app_dev/screens/cubit/data_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'auth/cubit/auth_cubit.dart';
 import 'routes/route.dart';
 import 'screens/messages/cubit/chat_cubit.dart';
-import 'screens/profile/cubit/profile_cubit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
             create: (context) => SearchUsersCubit(),
           ),
           BlocProvider(
-            create: (context) => ProfileCubit(),
+            create: (context) => DataCubit(),
           ),
         ],
         child: MaterialApp(

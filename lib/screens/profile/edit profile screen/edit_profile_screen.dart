@@ -5,7 +5,7 @@ import '../../../api/firebase_auth_api.dart';
 import '../../../style/style.dart';
 import '../../utils/get_user_pics.dart';
 import '../../utils/profile_textfield.dart';
-import 'utils/image_uploader.dart';
+import 'helper/image_uploader.dart';
 
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 final String currentUserId = firebaseAuth.currentUser!.uid;

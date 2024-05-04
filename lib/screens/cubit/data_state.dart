@@ -1,4 +1,10 @@
-part of 'profile_cubit.dart';
+part of 'data_cubit.dart';
+
+sealed class DataState {}
+
+final class DataInitial extends DataState {}
+
+// ! profile data state
 
 abstract class ProfileState {}
 
@@ -16,3 +22,7 @@ final class ProfileError extends ProfileState {
   final String error;
   ProfileError(this.error);
 }
+
+// ! profile data state
+
+

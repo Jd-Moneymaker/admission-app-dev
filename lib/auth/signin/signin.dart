@@ -64,7 +64,6 @@ class _SignInState extends State<SignIn> {
                     ),
                   );
                 }
-
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   child: AuthButton(

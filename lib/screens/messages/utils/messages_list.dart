@@ -70,9 +70,9 @@ class _MessagesListState extends State<MessagesList> {
     var ts = messageData['time']?.toDate();
     String formattedDate = '';
     if (ts != null) {
-      final formattedDate = DateFormat.jm().format(ts);
+      formattedDate = DateFormat.jm().format(ts);
     } else {
-      const formattedDate = 'Unknown';
+      formattedDate = 'Unknown';
     }
 
     final isMe = (FirebaseChatApi.currentUserEmail == messageData['reciever']);
